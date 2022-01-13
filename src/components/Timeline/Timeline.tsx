@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { generateNewTime } from '../../utils/generateNewTime';
+import { predefinedEvents } from './Timeline.data';
 import StyledTimeline from './Timeline.styled';
-
-type events = {
-    type: string;
-    description: string;
-    time?: string;
-};
-
-const predefinedEvents: events[] = [
-    { type: 'Initial event', description: 'An initial event occured' },
-    { type: 'Second event', description: 'We have liftoff' },
-    { type: 'Third event', description: 'Hmm, hello again' },
-    {
-        type: 'Fourth event',
-        description: 'Functional tests are ideal for React components',
-    },
-    {
-        type: 'Fifth event',
-        description: 'Testing library is a great library for testing',
-    },
-    { type: 'Sixth event', description: 'Jest goes along nicely with it' },
-];
+import { event } from './Timeline.types';
 
 let iteration = 0;
 
 const Timeline = () => {
-    const [events, setEvents] = useState([] as events[]);
+    const [events, setEvents] = useState([] as event[]);
 
     useEffect(() => {
         const intervalRef = setInterval(() => {
@@ -45,30 +26,35 @@ const Timeline = () => {
                 return [nextEvent, ...prevState];
             });
             iteration++;
-        }, 2000);
+        }, 5000);
 
         return () => {
             clearInterval(intervalRef);
         };
     }, []);
 
-    return (
-        <StyledTimeline>
-            {events.map((e, i, arr) => {
-                const isOdd = i % 2;
-                return (
-                    <div className={isOdd ? 'module--right' : 'module--left'}>
-                        <div className='content'>
-                            <h2 className='title'>{e.type}</h2>
-                            <p className='time'>{e.time}</p>
-                            <p className='description'>{e.description}</p>
-                        </div>
-                        {arr.length - 1 === i && (
-                            <div className='final-dot'></div>
-                        )}
+    const EventComponents = useMemo(() => {
+        return events.map((e, i, arr) => {
+            const isOdd = i % 2;
+            return (
+                <div
+                    key={i}
+                    className={isOdd ? 'module--right' : 'module--left'}
+                >
+                    <div className='content'>
+                        <h2 className='title'>{e.type}</h2>
+                        <p className='time'>{e.time}</p>
+                        <p className='description'>{e.description}</p>
                     </div>
-                );
-            })}
+                    {arr.length - 1 === i && <div className='final-dot'></div>}
+                </div>
+            );
+        });
+    }, [events]);
+
+    return (
+        <StyledTimeline data-testid='timeline-div'>
+            {EventComponents && EventComponents}
         </StyledTimeline>
     );
 };
