@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../styles/media-query.styles';
 
 const StyledTimeline = styled.div`
     position: relative;
@@ -74,7 +75,7 @@ const StyledTimeline = styled.div`
         }
     }
 
-    @media (min-width: 500px) {
+    @media ${device.tablet} {
         display: grid;
         grid-template-columns: 1fr 5px 1fr;
 
