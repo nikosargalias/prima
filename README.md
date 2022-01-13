@@ -1,46 +1,42 @@
-# Getting Started with Create React App
+## Launch the project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In order to launch the project, please run:
 
-## Available Scripts
+-   npm install
+-   npm start
+-   -   npm install installs all dependancies and npm start runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-In the project directory, you can run:
+In order to run the test suite please run:
 
-### `npm start`
+-   npm test
+-   -   This launches the test runner in the interactive watch mode.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Project architecture
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The project architecture is fairly straight forward for a small React project. For a large scalable solution I would certainly spend more time analysing its requirements and writing up a complete guide of the technologies chosen and architectural decisions made. For example, (here is a guide I wrote for a software solution I recently architected for an employer)[https://docs.google.com/document/d/1wTBlcHR6yOLbWS1cCtOqsHyvwrW7nEJySuNNtR9038Y/edit?usp=sharing]
 
-### `npm test`
+## Testing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+As you can see, there are a couple of tests added. These are very basic and their purpose is primarily to showcase that I'm aware of how to use Jest and testing library. For a better understanding of my testing capability, I would ask that you look at (this project hosted on my github)[https://github.com/nikosargalias/nikos-argalias-cars-frontend]
 
-### `npm run build`
+## State management
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In large scale applications, I would most likely opt for a centralised state management solution such as Redux. However, due to tiny size of this min app, I felt as though simple utilising a useState hook within the component was sufficient.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Styled Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+I'm a big advocate for scalable css, and in order to achieve that in the past, I would very strictly follow the BEM paradigm mixed with SCSS. However more recently I have become very fond of Styled Components because they generate unique IDs for every component, therefore eliminating the possibility of class name clashes and specificity concerns completely in large scale applications. It addition, it ties every bit of CSS to a specific component, which is essentially what BEM was trying to achieve.
 
-### `npm run eject`
+## Mobile Responsive Considerations
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I have implemented a mobile first responsive design. Utilising a media query built in a reusable manner. 
+## Performance considerations
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I made sure to implement some best practices regarding React performance such as cleaning up the setInterval upon component unmounting and useMemo hooks for memoization of values.
+## create-react-app
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Whereas in the past I have created my own configuration boilerplate for React applications, due to the time I had to spend on this project I decided to use Create-React-App which comes with a great default configuration setup.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Final thoughts
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Please be aware that in a real life project, I would take longer with each feature/story, ensuring proper test coverage, well though out architecture and the best code practices. While I did my best to showcase my ability, as this project was built in a short time crunch, it doesn't reflect the quality of work I would aim to achieve in a real production environment.
